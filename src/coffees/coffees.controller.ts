@@ -24,14 +24,11 @@ export class CoffeesController {
 
   @Get(':coffeeId')
   getSpecific(@Param('coffeeId') coffeeId: number) {
-    console.log(typeof coffeeId);
     return this.coffeesService.findOne(String(coffeeId));
   }
 
   @Post()
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
-    console.log(createCoffeeDto instanceof CreateCoffeeDto);
-    return createCoffeeDto;
     return this.coffeesService.create(createCoffeeDto);
   }
 
