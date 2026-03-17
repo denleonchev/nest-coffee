@@ -5,6 +5,7 @@ import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import Joi from 'joi';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import Joi from 'joi';
         DB_DATABASE: Joi.string().required(),
       }),
     }),
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
