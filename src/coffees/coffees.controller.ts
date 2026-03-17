@@ -3,23 +3,25 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Patch,
   Post,
   Query,
+  UseFilters,
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
+import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 
+@UseFilters(new HttpExceptionFilter())
 @Controller('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
   @Get()
   getAll(@Query() query: PaginationQueryDto) {
+    throw new Error('error');
     return this.coffeesService.findAll(query);
   }
 
