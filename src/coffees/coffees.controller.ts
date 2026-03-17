@@ -15,6 +15,7 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 import { Public } from 'src/common/decorators/public.decorator';
+import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 
 @UseFilters(new HttpExceptionFilter())
 @Controller('coffees')
@@ -31,7 +32,7 @@ export class CoffeesController {
   }
 
   @Get(':coffeeId')
-  getSpecific(@Param('coffeeId') coffeeId: number) {
+  getSpecific(@Param('coffeeId', ParseIntPipe) coffeeId: number) {
     return this.coffeesService.findOne(String(coffeeId));
   }
 
