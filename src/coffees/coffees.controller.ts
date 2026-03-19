@@ -16,11 +16,15 @@ import { PaginationQueryDto } from './dto/pagination-query.dto';
 import { HttpExceptionFilter } from 'src/common/filters/http-exception.filter';
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('coffees')
 @UseFilters(new HttpExceptionFilter())
 @Controller('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
+
+  @ApiForbiddenResponse({ description: 'Forbidden' })
   @Public()
   @Get()
   async getAll(@Query() query: PaginationQueryDto) {
